@@ -7,22 +7,16 @@ function photographerFactory(data) {
         const article = document.createElement('article');
 
         article.innerHTML =
-            `<a href = "#">
-                <img src="${picture}" alt="${name}">
-                <h2>${name}</h2>
-            </a>
-            <div>
-                <p>${city}, ${country}</p>
-                <p>${tagline}</p>
-                <p>${price}€/jour</p>
-            </div>`;
-
-        // const img = document.createElement('img');
-        // img.setAttribute("src", picture)
-        // const h2 = document.createElement('h2');
-        // h2.textContent = name;
-        // article.appendChild(img);
-        // article.appendChild(h2);
+        `<a href="photographer.html?id=${id}" aria-label="${name}">
+            <img src="${picture}" alt="">
+            <h2>${name}</h2>
+        </a>
+        <div>
+            <p>${city}, ${country}</p>
+            <p>${tagline}</p>
+            <p>${price}€/jour</p>
+        </div>
+        `
 
         return (article);
     }
