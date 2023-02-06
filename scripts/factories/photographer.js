@@ -17,8 +17,31 @@ function photographerFactory(data) {
             <p>${price}€/jour</p>
         </div>
         `
-
         return (article);
+    }
+    return {getUserCardDOM};
+}
+
+function photographerPageFactory(data) {
+    const { name, city, country, tagline, portrait } = data;
+
+    const picture = `assets/photographers/${portrait}`;
+
+    function getUserCardDOM() {
+        const header = document.querySelector('.photograph-header');
+
+        header.innerHTML =
+        `<div class="header-text-container">
+            <h1>${name}</h1>
+            <p>${city}, ${country}</p>
+            <p>${tagline}</p>
+        </div>
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="container">
+            <img src="${picture}" alt="">
+        </div>
+        `
+        return (header);
     }
     return {getUserCardDOM};
 }
