@@ -1,5 +1,5 @@
 function mediaFactory(media, photographer) {
-    const { name} = photographer;
+    const { name } = photographer;
     const { image, video, likes, title } = media;
     const type = media.video ? 'video' : 'image';
     let src;
