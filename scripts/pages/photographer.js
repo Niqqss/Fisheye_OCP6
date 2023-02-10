@@ -44,7 +44,18 @@ async function displayMedias(medias, photographers) {
     }
 };
 
-
+async function displayNameModal(photographers) {
+    const photographer = photographers.find((photographer) => photographer.id == photographerID);
+    if (!photographer) {
+        console.error(`Photographer with id "${photographerID}" not found.`);
+        return;
+    }
+    else {
+        const formModel = formNameFactory(photographer);
+        const formDOM = formModel.getUserNameDOM();
+    }
+    
+}
 
 async function init() {
     // Récupère les datas des photographes
@@ -52,6 +63,7 @@ async function init() {
     const { medias } = await getPhotographers();
     displayData(photographers);
     displayMedias(medias, photographers);
+    displayNameModal(photographers);
 };
 
 init();

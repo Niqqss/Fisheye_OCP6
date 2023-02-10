@@ -27,19 +27,31 @@
         <h2>Contactez-moi</h2>
         <img src="assets/icons/close.svg" alt="Bouton de fermeture" onclick="closeModal()">
       </header>
-      <form>
+      <form method="post" id="myform" novalidate>
         <div>
-          <label>Prénom</label>
-          <input>
+          <label for="firstname">Prénom</label>
+          <input type="text" name="firstname" class="form-input">
+          <label for="lasttname">Nom</label>
+          <input type="text" name="lastname" class="form-input">
+          <label for="email">Email</label>
+          <input type="email" name="email" class="form-input">
+          <label for="message">Votre message</label>
+          <textarea name="message" id="message" class="form-input"></textarea>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button class="contact_button" type="submit">Envoyer</button>
       </form>
     </div>
   </div>
+
+  <dialog id="lightbox">
+
+  </dialog>
 
   <script src="./scripts/factories/photographer.js"></script>
   <script src="./scripts/factories/photographerMedia.js"></script>
   <script src="./scripts/pages/photographer.js"></script>
   <script src="./scripts/utils/contactForm.js"></script>
+  <script src="./scripts/utils/lightbox.js"></script>
 </body>
+
 </html>

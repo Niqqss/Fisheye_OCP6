@@ -95,9 +95,24 @@
     color : #901C1C;
 }
 
+.daily-price {
+    position: fixed;
+    background-color: #DB8876;
+    padding : 1.5rem;
+    bottom : 0;
+    right : 0;
+    font-weight: bold;
+    margin-right: 5rem;
+    border-radius: 10px 10px 0 0;
+    font-size: 24px;
+}
+
+.daily-price p {
+    margin : 0;
+}
+
 #contact_modal {
-    position: absolute;
-    z-index : 1;
+    position: fixed;
     top : 0;
     width: 100%;
     height: 100%;
@@ -107,13 +122,13 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
-    margin: 25% auto;
+    margin : 5% auto;
 }
 
 .modal header {
@@ -141,6 +156,8 @@ form {
 form label {
     color: #312E2E;
     font-size: 36px;
+    margin-top : 1rem;
+    margin-bottom : .2rem;
 }
 
 form div {
@@ -156,4 +173,16 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
+    padding-left : 10px;
 }
+
+#message {
+    height: 170px;
+    width: 100%;
+    border-radius: 5px;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+}
+

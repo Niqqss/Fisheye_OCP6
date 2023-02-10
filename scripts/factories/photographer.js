@@ -23,7 +23,7 @@ function photographerFactory(data) {
 }
 
 function photographerPageFactory(data) {
-    const { name, city, country, tagline, portrait } = data;
+    const { name, city, country, tagline, portrait, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -39,6 +39,9 @@ function photographerPageFactory(data) {
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <div class="container">
             <img src="${picture}" alt="">
+        </div>
+        <div class="daily-price">
+            <p>${price}€ / jour</p>
         </div>
         `
         return (header);
