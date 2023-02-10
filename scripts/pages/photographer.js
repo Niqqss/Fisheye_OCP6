@@ -27,7 +27,7 @@ async function displayData(photographers) {
 };
 
 async function displayMedias(medias, photographers) {
-    const mediasSection = document.querySelector('.medias_section');
+    const mediasSection = document.querySelector('.medias-section');
     const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
     if (!filteredMedias) {
         console.error(`Media with id "${photographerID}" not found.`);
@@ -54,8 +54,23 @@ async function displayNameModal(photographers) {
         const formModel = formNameFactory(photographer);
         const formDOM = formModel.getUserNameDOM();
     }
-    
 }
+
+async function displayLightbox(medias, photographers) {
+    const lightbox = document.getElementById('lightbox');
+    const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
+    if (!filteredMedias) {
+        console.error(`Media with id "${photographerID}" not found.`);
+        return;
+    }
+    else {
+        const media = filteredMedias[0];
+        const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
+        const lightboxModel = lightboxFactory(media, photographer);
+        const lightboxDOM = lightboxModel.LightboxDOM();
+        lightbox.appendChild(lightboxDOM);
+    }
+};
 
 async function init() {
     // Récupère les datas des photographes
@@ -64,6 +79,7 @@ async function init() {
     displayData(photographers);
     displayMedias(medias, photographers);
     displayNameModal(photographers);
+    displayLightbox(medias, photographers)
 };
 
 init();
