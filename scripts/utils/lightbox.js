@@ -6,14 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const closeButton = document.querySelector(".close-button");
 
         medias.forEach((media) => media.addEventListener("click", () => {
+            lightbox.style.display = "flex";
             lightbox.showModal();
         }));
 
         closeButton.addEventListener('click', () => {
+            lightbox.style.display = "none";
             lightbox.close();
         });
-        
-    }, 500);
+
+    }, 100);
 });
 
 

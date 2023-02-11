@@ -69,6 +69,7 @@ async function displayLightbox(medias, photographers) {
         const lightboxModel = lightboxFactory(media, photographer);
         const lightboxDOM = lightboxModel.LightboxDOM();
         lightbox.appendChild(lightboxDOM);
+        lightbox.style.display = "none";
     }
 };
 
@@ -79,7 +80,7 @@ async function init() {
     displayData(photographers);
     displayMedias(medias, photographers);
     displayNameModal(photographers);
-    displayLightbox(medias, photographers)
+    displayLightbox(medias, photographers);
 };
 
 init();

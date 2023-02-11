@@ -191,6 +191,7 @@ form input {
     flex-wrap: wrap;
     justify-content: center;
     border : none;
+    overflow: hidden;
 }
 
 #lightbox::backdrop {
@@ -227,4 +228,3 @@ form input {
     font-size: 50px;
     cursor: pointer;
 }
-
