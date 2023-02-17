@@ -1,24 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // using a timeout so the domcontent is fully loaded
-    setTimeout(function () {
-        const lightbox = document.getElementById("lightbox");
-        const medias = document.querySelectorAll(".medias-section .media");
-        const closeButton = document.querySelector(".close-button");
-
-        medias.forEach((media) => media.addEventListener("click", () => {
-            lightbox.style.display = "flex";
-            lightbox.showModal();
-        }));
-
-        closeButton.addEventListener('click', () => {
-            lightbox.style.display = "none";
-            lightbox.close();
-        });
-
-    }, 100);
-});
-
-
 function lightboxFactory(media, photographer) {
     const { name } = photographer;
     const { image, video, title } = media;
@@ -62,6 +41,6 @@ function lightboxFactory(media, photographer) {
         lightboxContainer.appendChild(closeButton);
         return (lightboxContainer);
     }
-    return { name, image, LightboxDOM };
+    return { LightboxDOM };
 }
 

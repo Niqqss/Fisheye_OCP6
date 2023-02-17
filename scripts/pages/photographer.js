@@ -40,7 +40,6 @@ async function displayMedias(medias, photographers) {
             const userMediasDOM = mediaModel.getUserMediasDOM();
             mediasSection.appendChild(userMediasDOM);
         });
-
     }
 };
 
@@ -58,18 +57,24 @@ async function displayNameModal(photographers) {
 
 async function displayLightbox(medias, photographers) {
     const lightbox = document.getElementById('lightbox');
+    const mediasList = document.querySelectorAll(".medias-section .media");
     const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
+
     if (!filteredMedias) {
         console.error(`Media with id "${photographerID}" not found.`);
         return;
     }
     else {
-        const media = filteredMedias[0];
-        const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
-        const lightboxModel = lightboxFactory(media, photographer);
-        const lightboxDOM = lightboxModel.LightboxDOM();
-        lightbox.appendChild(lightboxDOM);
-        lightbox.style.display = "none";
+        for (let i = 0; i < mediasList.length; i++) {
+            mediasList[i].addEventListener('click', function () {
+                const index = i;
+                const media = filteredMedias[index]
+                const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
+                const lightboxModel = lightboxFactory(media, photographer);
+                const lightboxDOM = lightboxModel.LightboxDOM();
+                lightbox.appendChild(lightboxDOM);
+            })
+        }
     }
 };
 
@@ -81,6 +86,19 @@ async function init() {
     displayMedias(medias, photographers);
     displayNameModal(photographers);
     displayLightbox(medias, photographers);
+
+    const lightbox = document.getElementById("lightbox");
+    const mediasList = document.querySelectorAll(".medias-section .media");
+
+
+    mediasList.forEach((media) => media.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightbox.showModal();
+    }));
+
+    closeButton.addEventListener('click', () => {
+        lightbox.close();
+    });
 };
 
 init();
