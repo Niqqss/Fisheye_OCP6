@@ -22,29 +22,60 @@ function photographerFactory(data) {
     return {getUserCardDOM};
 }
 
+// REFAIRE L'ORDRE DE LA FONCTION
+
 function photographerPageFactory(data) {
     const { name, city, country, tagline, portrait, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
-        const header = document.querySelector('.photograph-header');
+        const photographerHeader = document.createElement('div');
+        const textInfos = document.createElement('div');
+        const photographerName = document.createElement('h1');
+        const photographerLocalisation = document.createElement('p');
+        const photographerTagline = document.createElement('p');
+        const photographerPicture = document.createElement('img');
+        const contactButton = document.createElement('button');
+        const pictureWrapper = document.createElement('div');
+        const moreInfo = document.createElement('div');
+        const dailyPrice = document.createElement('p');
+        const likesTotal = document.createElement('p');
+        const likeIcon = document.createElement('i');
 
-        header.innerHTML =
-        `<div class="header-text-container">
-            <h1>${name}</h1>
-            <p>${city}, ${country}</p>
-            <p>${tagline}</p>
-        </div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <div class="container">
-            <img src="${picture}" alt="">
-        </div>
-        <div class="daily-price">
-            <p>${price}€ / jour</p>
-        </div>
-        `
-        return (header);
+        // REFAIRE L'ORDRE DE LA FONCTION
+
+        likesTotal.textContent = 680 + " ";
+
+        dailyPrice.textContent = price + "€ / jour";
+
+        moreInfo.setAttribute("class", "more-info");
+        moreInfo.append(likesTotal, dailyPrice);
+
+        pictureWrapper.setAttribute("class", "container");
+        pictureWrapper.appendChild(photographerPicture);
+
+        contactButton.setAttribute("class", "contact_button");
+        contactButton.setAttribute("onclick", "displayModal()");
+        contactButton.textContent = "Contactez-moi";
+
+        photographerHeader.setAttribute("class", "photographer-header");
+        photographerHeader.append(textInfos, contactButton, pictureWrapper, moreInfo);
+
+        textInfos.setAttribute("class", "header-text-container");
+        textInfos.append(photographerName, photographerLocalisation, photographerTagline);
+
+        photographerPicture.setAttribute("src", picture);
+
+        likeIcon.setAttribute("class", "fa-solid fa-heart");
+        likesTotal.appendChild(likeIcon);
+
+        photographerName.textContent = name;
+        photographerLocalisation.textContent = city + ", " + country;
+        photographerTagline.textContent = tagline;
+        
+        return (photographerHeader);
+
     }
     return {getUserCardDOM};
 }

@@ -1,4 +1,4 @@
-const modal = document.getElementById("contact_modal");
+const modal = document.getElementById("contact-modal");
 
 function displayModal() {
     modal.style.display = "block";
@@ -27,7 +27,7 @@ form.addEventListener("submit", handleForm);
 
 function handleForm(e) {
     e.preventDefault();
-    console.log([...formInputs.map(val => val.value)]);
-    console.log("message pour signaler a l'utilisateur que son message a été envoyé");
+    console.log("L'utilisateur à envoyé : " + [...formInputs.map(val => val.value)]);
     form.reset();
+    closeModal();
 }

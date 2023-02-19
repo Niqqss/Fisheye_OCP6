@@ -15,6 +15,7 @@ async function getPhotographers() {
 }
 
 async function displayData(photographers) {
+    const photographerPage = document.querySelector('main');
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     if (!photographer) {
         console.error(`Photographer with id "${photographerID}" not found.`);
@@ -23,6 +24,7 @@ async function displayData(photographers) {
     else {
         const photographerModel = photographerPageFactory(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
+        photographerPage.appendChild(userCardDOM);
     }
 };
 
@@ -66,13 +68,47 @@ async function displayLightbox(medias, photographers) {
     }
     else {
         for (let i = 0; i < mediasList.length; i++) {
+
             mediasList[i].addEventListener('click', function () {
                 const index = i;
-                const media = filteredMedias[index]
+                const media = filteredMedias[index];
                 const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
                 const lightboxModel = lightboxFactory(media, photographer);
                 const lightboxDOM = lightboxModel.LightboxDOM();
                 lightbox.appendChild(lightboxDOM);
+
+                // RETIRER LA CLASSE LORS DU CLOSEMODAL AVEC LE BOUTON FERMER
+
+                const backgroundPage = document.querySelector('body');
+                backgroundPage.classList.add("hidden-body");
+
+                const lightboxMedia = document.querySelector('.lightbox-media');
+                let lightboxMediaName = document.querySelector('.lightbox-media-name');
+
+                function displayNextMedia() {
+                    i = (i + 1) % filteredMedias.length;
+                    const nextMedia = filteredMedias[i];
+                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + nextMedia.image;
+                    lightboxMediaName.textContent = nextMedia.title;
+                }
+
+                function displayPreviousMedia() {
+                    if (i === 0) {
+                        i = filteredMedias.length;
+                    }
+                    i = i - 1;
+                    const previousMedia = filteredMedias[i];
+                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + previousMedia.image;
+                    lightboxMediaName.textContent = previousMedia.title;
+                }
+
+                document.querySelector('.right-arrow').addEventListener("click", function () {
+                    displayNextMedia();
+                });
+
+                document.querySelector('.left-arrow').addEventListener("click", function () {
+                    displayPreviousMedia();
+                });
             })
         }
     }
@@ -87,18 +123,15 @@ async function init() {
     displayNameModal(photographers);
     displayLightbox(medias, photographers);
 
-    const lightbox = document.getElementById("lightbox");
     const mediasList = document.querySelectorAll(".medias-section .media");
 
-
     mediasList.forEach((media) => media.addEventListener("click", () => {
-        lightbox.style.display = "flex";
         lightbox.showModal();
     }));
-
-    closeButton.addEventListener('click', () => {
-        lightbox.close();
-    });
 };
 
 init();
+
+
+
+
