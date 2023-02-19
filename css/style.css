@@ -31,6 +31,10 @@ h1 {
     margin-left: 5rem;
 }
 
+main {
+    padding-bottom : 4rem;
+}
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

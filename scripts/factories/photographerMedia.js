@@ -38,11 +38,11 @@ function mediaFactory(media, photographer) {
             mediaLikes.textContent = newLikes + " ";
 
             if (likeIcon.classList.contains('active')) {
-                // Swap classes to get the outlined shape using fontawesome class
+                // swap classes to get the outlined shape using fontawesome class
                 likeIcon.classList.remove('fa-solid');
                 likeIcon.classList.add('fa-regular');
             } else {
-                // Swap classes to get the filled shape
+                // swap classes to get the filled shape
                 likeIcon.classList.remove('fa-regular');
                 likeIcon.classList.add('fa-solid');
             }

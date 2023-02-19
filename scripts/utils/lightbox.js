@@ -1,49 +1,56 @@
-function lightboxFactory(media, photographer) {
-    const { name } = photographer;
-    const { image, video, title } = media;
-    const type = media.video ? 'video' : 'image';
-    let src;
-    if (type === 'video') {
-        src = `assets/images/${name}/${video}`
-    } else {
-        src = `assets/images/${name}/${image}`;
+async function displayLightbox(medias, photographers) {
+    const lightbox = document.getElementById('lightbox');
+    const mediasList = document.querySelectorAll(".medias-section .media");
+    const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
+
+    if (!filteredMedias) {
+        console.error(`Media with id "${photographerID}" not found.`);
+        return;
     }
-    
-    function LightboxDOM() {
-        const lightboxContainer = document.createElement('div');
-        const leftArrow = document.createElement('span');
-        leftArrow.textContent = "<";
-        leftArrow.setAttribute("class", "left-arrow");
-        lightboxContainer.appendChild(leftArrow);
-        const figure = document.createElement('figure');
-        if (type === 'video') {
-            const video = document.createElement('video');
-            video.setAttribute("src", src);
-            video.setAttribute("class", "lightbox-media");
-            figure.appendChild(video);
-        } else {
-            const img = document.createElement('img');
-            img.setAttribute("src", src);
-            img.setAttribute("class", "lightbox-media");
-            figure.appendChild(img);
+    else {
+        for (let i = 0; i < mediasList.length; i++) {
+
+            mediasList[i].addEventListener('click', function () {
+                const index = i;
+                const media = filteredMedias[index];
+                const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
+                const lightboxModel = lightboxFactory(media, photographer);
+                const lightboxDOM = lightboxModel.LightboxDOM();
+                lightbox.appendChild(lightboxDOM);
+
+                // penser à retirer la classe hidden-body lors du clic pour fermer 
+
+                const backgroundPage = document.querySelector('body');
+                backgroundPage.classList.add("hidden-body");
+
+                const lightboxMedia = document.querySelector('.lightbox-media');
+                let lightboxMediaName = document.querySelector('.lightbox-media-name');
+
+                function displayNextMedia() {
+                    i = (i + 1) % filteredMedias.length;
+                    const nextMedia = filteredMedias[i];
+                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + nextMedia.image;
+                    lightboxMediaName.textContent = nextMedia.title;
+                }
+
+                function displayPreviousMedia() {
+                    if (i === 0) {
+                        i = filteredMedias.length;
+                    }
+                    i = i - 1;
+                    const previousMedia = filteredMedias[i];
+                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + previousMedia.image;
+                    lightboxMediaName.textContent = previousMedia.title;
+                }
+
+                document.querySelector('.right-arrow').addEventListener("click", function () {
+                    displayNextMedia();
+                });
+
+                document.querySelector('.left-arrow').addEventListener("click", function () {
+                    displayPreviousMedia();
+                });
+            })
         }
-        const mediaTitle = document.createElement('h3');
-        mediaTitle.setAttribute("class", "lightbox-media-name");
-        mediaTitle.textContent = title;
-        lightboxContainer.appendChild(figure);
-        figure.appendChild(mediaTitle);
-        const rightArrow = document.createElement('span');
-        rightArrow.textContent = ">";
-        rightArrow.setAttribute("class", "right-arrow");
-        lightboxContainer.appendChild(rightArrow);
-        const closeButton = document.createElement('span');
-        closeButton.textContent = "x";
-        closeButton.setAttribute("class", "close-button");
-        lightboxContainer.appendChild(closeButton);
-        return (lightboxContainer);
     }
-    return { LightboxDOM };
-}
-
-
-
+};
