@@ -2,8 +2,9 @@ async function displayLightbox(medias, photographers) {
     const lightbox = document.getElementById('lightbox');
     const mediasList = document.querySelectorAll(".medias-section .media");
     const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
+    const sortedMedias = sortMediasByLikes(filteredMedias);
 
-    if (!filteredMedias) {
+    if (!sortedMedias) {
         console.error(`Media with id "${photographerID}" not found.`);
         return;
     }
@@ -12,7 +13,7 @@ async function displayLightbox(medias, photographers) {
 
             mediasList[i].addEventListener('click', function () {
                 const index = i;
-                const media = filteredMedias[index];
+                const media = sortedMedias[index];
                 const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
                 const lightboxModel = lightboxFactory(media, photographer);
                 const lightboxDOM = lightboxModel.LightboxDOM();
@@ -27,18 +28,18 @@ async function displayLightbox(medias, photographers) {
                 let lightboxMediaName = document.querySelector('.lightbox-media-name');
 
                 function displayNextMedia() {
-                    i = (i + 1) % filteredMedias.length;
-                    const nextMedia = filteredMedias[i];
+                    i = (i + 1) % sortedMedias.length;
+                    const nextMedia = sortedMedias[i];
                     lightboxMedia.src = "assets/images/" + photographer.name + "/" + nextMedia.image;
                     lightboxMediaName.textContent = nextMedia.title;
                 }
 
                 function displayPreviousMedia() {
                     if (i === 0) {
-                        i = filteredMedias.length;
+                        i = sortedMedias.length;
                     }
                     i = i - 1;
-                    const previousMedia = filteredMedias[i];
+                    const previousMedia = sortedMedias[i];
                     lightboxMedia.src = "assets/images/" + photographer.name + "/" + previousMedia.image;
                     lightboxMediaName.textContent = previousMedia.title;
                 }
