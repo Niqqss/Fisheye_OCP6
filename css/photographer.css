@@ -95,7 +95,7 @@ main {
 
 .medias-section article h3,
 .medias-section article p {
-    font-size: 24px;
+    font-size: 20px;
     color: #901C1C;
     font-weight: 400;
 }
@@ -103,6 +103,7 @@ main {
 .more-info {
     position: fixed;
     display: flex;
+    flex-direction: row-reverse;
     gap: 2rem;
     background-color: #DB8876;
     padding: 1.5rem;

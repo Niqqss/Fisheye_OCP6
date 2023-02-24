@@ -6,30 +6,43 @@ function photographerFactory(data) {
     function getUserCardDOM() {
         const article = document.createElement('article');
 
-        article.innerHTML =
-        `<a href="photographer.html?id=${id}" aria-label="${name}">
-            <img src="${picture}" alt="">
-            <h2>${name}</h2>
-        </a>
-        <div>
-            <p>${city}, ${country}</p>
-            <p>${tagline}</p>
-            <p>${price}€/jour</p>
-        </div>
-        `
+        const photographerProfileLink = document.createElement('a');
+        photographerProfileLink.href = `photographer.html?id=${id}`;
+        photographerProfileLink.setAttribute("aria-label", name);
+
+        const photographerPicture = document.createElement('img');
+        photographerPicture.setAttribute("src", picture);
+
+        const photographerName = document.createElement('h2');
+        photographerName.textContent = name;
+
+        photographerProfileLink.append(photographerPicture, photographerName);
+
+        const textContainer = document.createElement('div');
+        const photographerLocation = document.createElement('p');
+        const photographerTagline = document.createElement('p');
+        const photographerPrice = document.createElement('p');
+
+        photographerLocation.textContent = city + ", " + country;
+        photographerTagline.textContent = tagline;
+        photographerPrice.textContent = price + "€/jour";
+
+        textContainer.append(photographerLocation, photographerTagline, photographerPrice);
+
+        article.append(photographerProfileLink, textContainer);
+
         return (article);
     }
-    return {getUserCardDOM};
+    return { getUserCardDOM };
 }
 
-// REFAIRE L'ORDRE DE LA FONCTION
-
-function photographerPageFactory(data) {
+function photographerProfileFactory(data) {
     const { name, city, country, tagline, portrait, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
+        // declare elements
         const photographerHeader = document.createElement('div');
         const textInfos = document.createElement('div');
         const photographerName = document.createElement('h1');
@@ -40,42 +53,29 @@ function photographerPageFactory(data) {
         const pictureWrapper = document.createElement('div');
         const moreInfo = document.createElement('div');
         const dailyPrice = document.createElement('p');
-        const likesTotal = document.createElement('p');
-        const likeIcon = document.createElement('i');
 
-        // REFAIRE L'ORDRE DE LA FONCTION
+        // set attributes
+        photographerName.textContent = name;
+        photographerLocalisation.textContent = `${city}, ${country}`;
+        photographerTagline.textContent = tagline;
+        dailyPrice.textContent = `${price}€ / jour`;
+        // enlever le text content
+        contactButton.textContent = 'Contactez-moi';
+        contactButton.setAttribute('class', 'contact_button');
+        contactButton.setAttribute('onclick', 'displayModal()');
+        photographerPicture.setAttribute('src', picture);
 
-        likesTotal.textContent = 680 + " ";
-
-        dailyPrice.textContent = price + "€ / jour";
-
-        moreInfo.setAttribute("class", "more-info");
-        moreInfo.append(likesTotal, dailyPrice);
-
-        pictureWrapper.setAttribute("class", "container");
+        // assemble  elements
+        moreInfo.setAttribute('class', 'more-info');
+        moreInfo.append(dailyPrice);
+        pictureWrapper.setAttribute('class', 'container');
         pictureWrapper.appendChild(photographerPicture);
-
-        contactButton.setAttribute("class", "contact_button");
-        contactButton.setAttribute("onclick", "displayModal()");
-        contactButton.textContent = "Contactez-moi";
-
-        photographerHeader.setAttribute("class", "photographer-header");
+        textInfos.setAttribute('class', 'header-text-container');
+        textInfos.append(photographerName, photographerLocalisation, photographerTagline);
+        photographerHeader.setAttribute('class', 'photographer-header');
         photographerHeader.append(textInfos, contactButton, pictureWrapper, moreInfo);
 
-        textInfos.setAttribute("class", "header-text-container");
-        textInfos.append(photographerName, photographerLocalisation, photographerTagline);
-
-        photographerPicture.setAttribute("src", picture);
-
-        likeIcon.setAttribute("class", "fa-solid fa-heart");
-        likesTotal.appendChild(likeIcon);
-
-        photographerName.textContent = name;
-        photographerLocalisation.textContent = city + ", " + country;
-        photographerTagline.textContent = tagline;
-        
         return (photographerHeader);
-
     }
-    return {getUserCardDOM};
+    return { getUserCardDOM };
 }

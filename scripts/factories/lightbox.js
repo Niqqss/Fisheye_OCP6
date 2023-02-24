@@ -20,6 +20,7 @@ function lightboxFactory(media, photographer) {
             const video = document.createElement('video');
             video.setAttribute("src", src);
             video.setAttribute("class", "lightbox-media");
+            video.setAttribute("controls", "");
             figure.appendChild(video);
         } else {
             const img = document.createElement('img');

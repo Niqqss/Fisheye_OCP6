@@ -44,6 +44,7 @@ async function displayMedias(medias, photographers) {
     }
 }
 
+
 function sortMediasByLikes(medias) {
     return medias.sort((a, b) => b.likes - a.likes);
 }
@@ -55,4 +56,3 @@ function sortMediasByDate(medias) {
 function sortMediasByTitle(medias) {
     return medias.sort((a, b) => a.title.localeCompare(b.title));
 }
-

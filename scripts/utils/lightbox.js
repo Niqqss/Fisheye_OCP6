@@ -19,19 +19,35 @@ async function displayLightbox(medias, photographers) {
                 const lightboxDOM = lightboxModel.LightboxDOM();
                 lightbox.appendChild(lightboxDOM);
 
-                // penser à retirer la classe hidden-body lors du clic pour fermer 
+                const closeButton = document.querySelector('.close-button');
 
                 const backgroundPage = document.querySelector('body');
                 backgroundPage.classList.add("hidden-body");
 
-                const lightboxMedia = document.querySelector('.lightbox-media');
+                let lightboxMedia = document.querySelector('.lightbox-media');
                 let lightboxMediaName = document.querySelector('.lightbox-media-name');
 
                 function displayNextMedia() {
                     i = (i + 1) % sortedMedias.length;
                     const nextMedia = sortedMedias[i];
-                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + nextMedia.image;
+                    const type = nextMedia.video ? 'video' : 'image';
                     lightboxMediaName.textContent = nextMedia.title;
+                    const figure = document.querySelector("dialog figure")
+
+                    if (type === 'video') {
+                        const video = document.createElement('video');
+                        video.setAttribute('src', `assets/images/${photographer.name}/${nextMedia.video}`);
+                        video.setAttribute('class', 'lightbox-media');
+                        video.setAttribute("controls", "");
+                        figure.replaceChild(video, lightboxMedia);
+                        lightboxMedia = video;
+                    } else {
+                        const img = document.createElement('img');
+                        img.setAttribute('src', `assets/images/${photographer.name}/${nextMedia.image}`);
+                        img.setAttribute('class', 'lightbox-media');
+                        figure.replaceChild(img, lightboxMedia);
+                        lightboxMedia = img;
+                    }
                 }
 
                 function displayPreviousMedia() {
@@ -40,8 +56,24 @@ async function displayLightbox(medias, photographers) {
                     }
                     i = i - 1;
                     const previousMedia = sortedMedias[i];
-                    lightboxMedia.src = "assets/images/" + photographer.name + "/" + previousMedia.image;
+                    const type = previousMedia.video ? 'video' : 'image';
                     lightboxMediaName.textContent = previousMedia.title;
+                    const figure = document.querySelector("dialog figure")
+
+                    if (type === 'video') {
+                        const video = document.createElement('video');
+                        video.setAttribute('src', `assets/images/${photographer.name}/${previousMedia.video}`);
+                        video.setAttribute('class', 'lightbox-media');
+                        video.setAttribute("controls", "");
+                        figure.replaceChild(video, lightboxMedia);
+                        lightboxMedia = video;
+                    } else {
+                        const img = document.createElement('img');
+                        img.setAttribute('src', `assets/images/${photographer.name}/${previousMedia.image}`);
+                        img.setAttribute('class', 'lightbox-media');
+                        figure.replaceChild(img, lightboxMedia);
+                        lightboxMedia = img;
+                    }
                 }
 
                 document.querySelector('.right-arrow').addEventListener("click", function () {
@@ -51,6 +83,13 @@ async function displayLightbox(medias, photographers) {
                 document.querySelector('.left-arrow').addEventListener("click", function () {
                     displayPreviousMedia();
                 });
+
+                closeButton.addEventListener("click", function () {
+                    lightbox.close()
+                    backgroundPage.classList.remove("hidden-body");
+                    lightbox.innerHTML = "";
+                })
+
             })
         }
     }

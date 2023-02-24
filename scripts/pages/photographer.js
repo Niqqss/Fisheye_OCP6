@@ -15,14 +15,14 @@ async function getPhotographers() {
 }
 
 async function displayData(photographers) {
-    const photographerPage = document.querySelector('main');
+    const photographerPage = document.getElementById('main');
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     if (!photographer) {
         console.error(`Photographer with id "${photographerID}" not found.`);
         return;
     }
     else {
-        const photographerModel = photographerPageFactory(photographer);
+        const photographerModel = photographerProfileFactory(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographerPage.appendChild(userCardDOM);
     }
@@ -31,12 +31,26 @@ async function displayData(photographers) {
 async function displayNameModal(photographers) {
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     if (!photographer) {
-        console.error(`Photographer with id "${photographerID}" not found.`);
+        console.error(`Could not display photographer name for ID "${photographerID}"`);
         return;
     }
     else {
         const formModel = formNameFactory(photographer);
         const formDOM = formModel.getUserNameDOM();
+    }
+}
+
+async function displayTotalLikes(photographers, medias) {
+    const photographer = photographers.find((photographer) => photographer.id == photographerID);
+    const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
+
+    if (!photographer) {
+        console.error(`Could not display total likes for photographer with id "${photographerID}"`);
+        return;
+    }
+    else {
+        const likeButtons = document.querySelectorAll('i.fa-heart');
+        likesUpdate(filteredMedias, likeButtons);
     }
 }
 
@@ -48,6 +62,7 @@ async function init() {
     displayMedias(medias, photographers);
     displayNameModal(photographers);
     displayLightbox(medias, photographers);
+    displayTotalLikes(photographers, medias)
 
     const mediasList = document.querySelectorAll(".medias-section .media");
 
@@ -57,7 +72,3 @@ async function init() {
 };
 
 init();
-
-
-
-
