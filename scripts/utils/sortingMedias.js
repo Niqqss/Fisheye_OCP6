@@ -50,7 +50,7 @@ function sortMediasByLikes(medias) {
 }
 
 function sortMediasByDate(medias) {
-    return medias.sort((a, b) => new Date(a.date) - new Date(b.date));
+    return medias.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 function sortMediasByTitle(medias) {
