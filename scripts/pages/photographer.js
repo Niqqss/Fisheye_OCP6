@@ -61,14 +61,7 @@ async function init() {
     displayData(photographers);
     displayMedias(medias, photographers);
     displayNameModal(photographers);
-    displayLightbox(medias, photographers);
-    displayTotalLikes(photographers, medias)
-
-    const mediasList = document.querySelectorAll(".medias-section .media");
-
-    mediasList.forEach((media) => media.addEventListener("click", () => {
-        lightbox.showModal();
-    }));
+    displayTotalLikes(photographers, medias);
 };
 
 init();

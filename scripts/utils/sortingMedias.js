@@ -14,6 +14,7 @@ async function displayMedias(medias, photographers) {
     popularityFilterButton.addEventListener('click', () => {
         sortedMedias = sortMediasByLikes(sortedMedias);
         displaySortedMedias(sortedMedias);
+        lightboxFactory(medias, photographers)
     });
 
     const dateFilterButton = document.querySelector('#dateFilter');
@@ -41,6 +42,14 @@ async function displayMedias(medias, photographers) {
             const userMediasDOM = mediaModel.getUserMediasDOM();
             mediasSection.appendChild(userMediasDOM);
         });
+
+        displayLightbox(sortedMedias, photographers);
+
+        const mediasList = document.querySelectorAll(".medias-section .media");
+
+        mediasList.forEach((media) => media.addEventListener("click", () => {
+            lightbox.showModal();
+        }));
     }
 }
 

@@ -2,9 +2,8 @@ async function displayLightbox(medias, photographers) {
     const lightbox = document.getElementById('lightbox');
     const mediasList = document.querySelectorAll(".medias-section .media");
     const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
-    const sortedMedias = sortMediasByLikes(filteredMedias);
 
-    if (!sortedMedias) {
+    if (!medias) {
         console.error(`Media with id "${photographerID}" not found.`);
         return;
     }
@@ -13,7 +12,7 @@ async function displayLightbox(medias, photographers) {
 
             mediasList[i].addEventListener('click', function () {
                 const index = i;
-                const media = sortedMedias[index];
+                const media = medias[index];
                 const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
                 const lightboxModel = lightboxFactory(media, photographer);
                 const lightboxDOM = lightboxModel.LightboxDOM();
@@ -28,8 +27,8 @@ async function displayLightbox(medias, photographers) {
                 let lightboxMediaName = document.querySelector('.lightbox-media-name');
 
                 function displayNextMedia() {
-                    i = (i + 1) % sortedMedias.length;
-                    const nextMedia = sortedMedias[i];
+                    i = (i + 1) % medias.length;
+                    const nextMedia = medias[i];
                     const type = nextMedia.video ? 'video' : 'image';
                     lightboxMediaName.textContent = nextMedia.title;
                     const figure = document.querySelector("dialog figure")
@@ -52,10 +51,10 @@ async function displayLightbox(medias, photographers) {
 
                 function displayPreviousMedia() {
                     if (i === 0) {
-                        i = sortedMedias.length;
+                        i = medias.length;
                     }
                     i = i - 1;
-                    const previousMedia = sortedMedias[i];
+                    const previousMedia = medias[i];
                     const type = previousMedia.video ? 'video' : 'image';
                     lightboxMediaName.textContent = previousMedia.title;
                     const figure = document.querySelector("dialog figure")
