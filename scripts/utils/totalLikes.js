@@ -2,7 +2,7 @@ function likesUpdate(medias, likeButtons) {
     const totalLikesContainer = document.querySelector('.more-info');
     const totalLikes = document.createElement('p');
     const likeIcon = document.createElement('i');
-    likeIcon.setAttribute('class', 'fa-solid fa-heart');
+    likeIcon.className = "fa-solid fa-heart";
 
     let total = 0;
     medias.forEach(media => {

@@ -34,24 +34,13 @@ main {
     font-size: 18px;
 }
 
-.photographer-header .container {
+.photographer-header img {
     height: 250px;
     width: 250px;
     border-radius: 50%;
     box-shadow: 0 5px 10px rgba(49, 49, 49, 0.3);
-    position: relative;
-    overflow: hidden;
+    object-fit: cover;
 }
-
-.photographer-header img {
-    position: absolute;
-    min-width: 1000%;
-    min-height: 1000%;
-    left: 50%;
-    top: 60%;
-    transform: translateX(-50%) translateY(-50%) scale(0.1);
-}
-
 
 .contact_button {
     font-size: 20px;
@@ -66,11 +55,16 @@ main {
     cursor: pointer;
 }
 
+.contact_button:hover {
+    background-color: #DB8876;
+}
+
 .medias-section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     row-gap: 100px;
-    column-gap: 200px;
+    column-gap: 145px;
+    margin : 0 100px;
 }
 
 .medias-section article {
@@ -140,8 +134,8 @@ main {
 }
 
 .modal header {
-    justify-content: space-between;
     width: 100%;
+    margin : 1rem 0;
 }
 
 .modal header img {
@@ -149,9 +143,9 @@ main {
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 60px;
     font-weight: normal;
-    text-align: center;
+    margin : 0;
 }
 
 form {
@@ -220,9 +214,10 @@ form input {
     object-fit: cover;
 }
 
-#lightbox h3 {
+.lightbox-media-name {
     color: #901C1C;
-    font-weight: 400;
+    font-size : 1.3rem;
+    margin-top : 1rem;
 }
 
 .left-arrow,
@@ -253,5 +248,39 @@ form input {
     display: flex;
     gap: 1rem;
     font-weight: 900;
+    align-items: center;
 }
 
+.filter {
+    cursor: pointer;
+    display: flex;
+    background-color: #901C1C;
+    padding : .5rem 1rem;
+    border-radius: 5px;
+    font-weight: 400;
+}
+
+.filter ul {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    
+}
+
+.filter li {
+    list-style-type: none;
+    padding: .5rem 0;
+    color: white;
+    width: 5rem;
+    display: flex;
+    align-items: center;
+    gap : 1rem;
+    width: 100%;
+}
+
+.filter li:not(:last-child) {
+    border-bottom : 1px solid white;
+}

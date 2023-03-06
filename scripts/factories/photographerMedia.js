@@ -13,15 +13,15 @@ function mediaFactory(media, photographer) {
         const article = document.createElement('article');
         if (type === 'video') {
             const video = document.createElement('video');
-            video.setAttribute("src", src);
-            video.setAttribute("class", "media");
+            video.src = src;
+            video.className = "media";
             // ID to match with the image displayed in lightbox
             video.setAttribute("data-id", id);
             article.appendChild(video);
         } else {
             const img = document.createElement('img');
-            img.setAttribute("src", src);
-            img.setAttribute("class", "media");
+            img.src = src;
+            img.className = "media";
             img.setAttribute("data-id", id);
             article.appendChild(img);
         }
@@ -31,9 +31,11 @@ function mediaFactory(media, photographer) {
         const likeIcon = document.createElement('i');
         mediaTitle.textContent = title;
         mediaLikes.textContent = likes + " ";
-        likeIcon.setAttribute("class", "fa-regular fa-heart");
+        likeIcon.className = "fa-regular fa-heart";
 
+        // add an event listener to the heart icon to toggle the "liked" property and update the heart icon
         likeIcon.addEventListener('click', () => {
+            media.liked = !media.liked; // toggle the "liked" property
             const newLikes = parseInt(mediaLikes.textContent) + (likeIcon.classList.contains('active') ? -1 : 1);
             mediaLikes.textContent = newLikes + " ";
 
@@ -59,5 +61,3 @@ function mediaFactory(media, photographer) {
     }
     return { getUserMediasDOM };
 }
-
-

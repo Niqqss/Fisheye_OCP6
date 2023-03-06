@@ -11,7 +11,7 @@ function photographerFactory(data) {
         photographerProfileLink.setAttribute("aria-label", name);
 
         const photographerPicture = document.createElement('img');
-        photographerPicture.setAttribute("src", picture);
+        photographerPicture.src = picture;
 
         const photographerName = document.createElement('h2');
         photographerName.textContent = name;
@@ -50,7 +50,6 @@ function photographerProfileFactory(data) {
         const photographerTagline = document.createElement('p');
         const photographerPicture = document.createElement('img');
         const contactButton = document.createElement('button');
-        const pictureWrapper = document.createElement('div');
         const moreInfo = document.createElement('div');
         const dailyPrice = document.createElement('p');
 
@@ -61,19 +60,17 @@ function photographerProfileFactory(data) {
         dailyPrice.textContent = `${price}€ / jour`;
         // enlever le text content
         contactButton.textContent = 'Contactez-moi';
-        contactButton.setAttribute('class', 'contact_button');
+        contactButton.className = "contact_button";
         contactButton.setAttribute('onclick', 'displayModal()');
-        photographerPicture.setAttribute('src', picture);
+        photographerPicture.src = picture;
 
         // assemble  elements
-        moreInfo.setAttribute('class', 'more-info');
+        moreInfo.className = "more-info";
         moreInfo.append(dailyPrice);
-        pictureWrapper.setAttribute('class', 'container');
-        pictureWrapper.appendChild(photographerPicture);
-        textInfos.setAttribute('class', 'header-text-container');
+        textInfos.className = "header-text-container";
         textInfos.append(photographerName, photographerLocalisation, photographerTagline);
-        photographerHeader.setAttribute('class', 'photographer-header');
-        photographerHeader.append(textInfos, contactButton, pictureWrapper, moreInfo);
+        photographerHeader.className = "photographer-header";
+        photographerHeader.append(textInfos, contactButton, photographerPicture, moreInfo);
 
         return (photographerHeader);
     }
