@@ -1,25 +1,21 @@
-const listArrow = document.querySelector('#popularityFilter i');
+let activeFilter = document.querySelector('.filters-list li:first-child');
+const listIcon = document.createElement('i');
+const filtersList = document.querySelector('.filters-list');
+const filters = document.querySelectorAll('.filters-list li')
+listIcon.className = "fa-solid fa-chevron-down";
+activeFilter.append(listIcon);
 
-listArrow.addEventListener('click', function () {
-    if (listArrow.classList.contains('fa-chevron-down')) {
-        listArrow.classList.remove('fa-chevron-down');
-        listArrow.classList.add('fa-chevron-up');
-    }
-    else {
-        listArrow.classList.remove('fa-chevron-up');
-        listArrow.classList.add('fa-chevron-down');
-    }
-})
-
-const activeFilter = document.querySelector('.filter ul li:first-of-type');
-const filters = document.querySelectorAll('.filter ul li');
 filters.forEach(filter => {
     filter.addEventListener('click', function () {
-        activeFilter.textContent = filter.textContent;
-        activeFilter.appendChild(listArrow)
-        console.log(filter)
-    })
-    
+        // Swap the active filter and clicked filter in the DOM
+        filtersList.insertBefore(this, activeFilter);
+        // Update the active filter reference to the clicked filter
+        activeFilter = this;
+        filtersList.classList.toggle('show');
+        listIcon.classList.toggle('fa-chevron-down');
+        listIcon.classList.toggle('fa-chevron-up');
+        activeFilter.appendChild(listIcon);
+    });
 });
-console.log(filters)
-console.log(activeFilter)
+
+

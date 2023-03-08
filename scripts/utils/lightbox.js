@@ -58,6 +58,20 @@ async function displayLightbox(medias, photographers) {
                 displayMedia(previousMedia);
             }
 
+            function handleKeyDown(event) {
+                if (event.key === 'Escape') {
+                    lightbox.close();
+                    backgroundPage.classList.remove("hidden-body");
+                    lightbox.innerHTML = "";
+                    document.removeEventListener('keydown', handleKeyDown);
+                } else if (event.key === 'ArrowRight') {
+                    displayNextMedia();
+                } else if (event.key === 'ArrowLeft') {
+                    displayPreviousMedia();
+                }
+            }
+
+            document.addEventListener('keydown', handleKeyDown);
             document.querySelector('.right-arrow').addEventListener("click", displayNextMedia);
             document.querySelector('.left-arrow').addEventListener("click", displayPreviousMedia);
 
@@ -65,6 +79,7 @@ async function displayLightbox(medias, photographers) {
                 lightbox.close()
                 backgroundPage.classList.remove("hidden-body");
                 lightbox.innerHTML = "";
+                document.removeEventListener('keydown', handleKeyDown);
             });
         });
     };

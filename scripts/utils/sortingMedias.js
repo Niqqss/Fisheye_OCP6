@@ -11,42 +11,23 @@ async function displayMedias(medias, photographers) {
 
     let currentSortOrder = 'likesDescending';
 
-    // attach event listeners to sorting buttons
-    const popularityFilterButton = document.getElementById('popularityFilter');
-    const totalLikesElement = document.querySelector('.total-likes');
+    function addFilterClickListener(buttonId, sortOrder, sortFunction) {
+        const button = document.getElementById(buttonId);
+        button.addEventListener('click', () => {
+            if (currentSortOrder === sortOrder) {
+                return;
+            }
+            sortedMedias = sortFunction(sortedMedias);
+            displaySortedMedias(sortedMedias);
+            lightboxFactory(medias, photographers);
+            currentSortOrder = sortOrder;
+            likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
+        });
+    }
 
-    popularityFilterButton.addEventListener('click', () => {
-        if (currentSortOrder === 'likesDescending') {
-            return;
-        }
-        sortedMedias = sortMediasByLikes(sortedMedias);
-        displaySortedMedias(sortedMedias);
-        lightboxFactory(medias, photographers)
-        currentSortOrder = 'likesDescending';
-        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
-    });
-
-    const dateFilterButton = document.getElementById('dateFilter');
-    dateFilterButton.addEventListener('click', () => {
-        if (currentSortOrder === 'dateDescending') {
-            return;
-        }
-        sortedMedias = sortMediasByDate(sortedMedias);
-        displaySortedMedias(sortedMedias);
-        currentSortOrder = 'dateDescending';
-        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
-    });
-
-    const titleFilterButton = document.getElementById('titleFilter');
-    titleFilterButton.addEventListener('click', () => {
-        if (currentSortOrder === 'titleAscending') {
-            return;
-        }
-        sortedMedias = sortMediasByTitle(sortedMedias);
-        displaySortedMedias(sortedMedias);
-        currentSortOrder = 'titleAscending';
-        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
-    });
+    addFilterClickListener('popularityFilter', 'likesDescending', sortMediasByLikes);
+    addFilterClickListener('dateFilter', 'dateDescending', sortMediasByDate);
+    addFilterClickListener('titleFilter', 'titleAscending', sortMediasByTitle);
 
     function displaySortedMedias(sortedMedias) {
         // clear existing medias from the DOM
@@ -65,9 +46,7 @@ async function displayMedias(medias, photographers) {
                 const likeIcon = userMediasDOM.querySelector('.fa-heart');
                 likeIcon.classList.add('active');
                 likeIcon.classList.add('fa-solid');
-                const likesCountElement = userMediasDOM.querySelector('.likes-count');
                 media.likes += 1;
-                likesCountElement.textContent = media.likes + ' ';
             }
             mediasSection.appendChild(userMediasDOM);
         });
