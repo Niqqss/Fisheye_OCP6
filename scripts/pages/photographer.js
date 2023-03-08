@@ -50,17 +50,26 @@ async function displayTotalLikes(photographers, medias) {
     }
     else {
         const likeButtons = document.querySelectorAll('i.fa-heart');
+        const totalLikesContainer = document.querySelector('.more-info');
+        let totalLikesElement = totalLikesContainer.querySelector('.total-likes');
+
+        if (!totalLikesElement) {
+            totalLikesElement = document.createElement('p');
+            totalLikesElement.classList.add('total-likes');
+            totalLikesContainer.appendChild(totalLikesElement);
+        }
         likesUpdate(filteredMedias, likeButtons);
     }
 }
+
 
 async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     const { medias } = await getPhotographers();
     displayData(photographers);
-    displayMedias(medias, photographers);
     displayNameModal(photographers);
+    displayMedias(medias, photographers);
     displayTotalLikes(photographers, medias);
 };
 

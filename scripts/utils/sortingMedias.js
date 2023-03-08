@@ -12,7 +12,9 @@ async function displayMedias(medias, photographers) {
     let currentSortOrder = 'likesDescending';
 
     // attach event listeners to sorting buttons
-    const popularityFilterButton = document.querySelector('#popularityFilter');
+    const popularityFilterButton = document.getElementById('popularityFilter');
+    const totalLikesElement = document.querySelector('.total-likes');
+
     popularityFilterButton.addEventListener('click', () => {
         if (currentSortOrder === 'likesDescending') {
             return;
@@ -21,9 +23,10 @@ async function displayMedias(medias, photographers) {
         displaySortedMedias(sortedMedias);
         lightboxFactory(medias, photographers)
         currentSortOrder = 'likesDescending';
+        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
     });
 
-    const dateFilterButton = document.querySelector('#dateFilter');
+    const dateFilterButton = document.getElementById('dateFilter');
     dateFilterButton.addEventListener('click', () => {
         if (currentSortOrder === 'dateDescending') {
             return;
@@ -31,9 +34,10 @@ async function displayMedias(medias, photographers) {
         sortedMedias = sortMediasByDate(sortedMedias);
         displaySortedMedias(sortedMedias);
         currentSortOrder = 'dateDescending';
+        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
     });
 
-    const titleFilterButton = document.querySelector('#titleFilter');
+    const titleFilterButton = document.getElementById('titleFilter');
     titleFilterButton.addEventListener('click', () => {
         if (currentSortOrder === 'titleAscending') {
             return;
@@ -41,6 +45,7 @@ async function displayMedias(medias, photographers) {
         sortedMedias = sortMediasByTitle(sortedMedias);
         displaySortedMedias(sortedMedias);
         currentSortOrder = 'titleAscending';
+        likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
     });
 
     function displaySortedMedias(sortedMedias) {
@@ -48,17 +53,21 @@ async function displayMedias(medias, photographers) {
         mediasSection.innerHTML = '';
 
         const likedMediaIds = new Set(sortedMedias.filter(media => media.liked).map(media => media.id));
-        console.log(likedMediaIds);
 
         // display sorted medias
         sortedMedias.forEach((media) => {
             const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
             const mediaModel = mediaFactory(media, photographer);
             const userMediasDOM = mediaModel.getUserMediasDOM();
+
+            // Check if the media has been liked and update the heart icon and likes count
             if (likedMediaIds.has(media.id)) {
                 const likeIcon = userMediasDOM.querySelector('.fa-heart');
                 likeIcon.classList.add('active');
                 likeIcon.classList.add('fa-solid');
+                const likesCountElement = userMediasDOM.querySelector('.likes-count');
+                media.likes += 1;
+                likesCountElement.textContent = media.likes + ' ';
             }
             mediasSection.appendChild(userMediasDOM);
         });
