@@ -14,12 +14,15 @@ function lightboxFactory(media, photographer) {
         const leftArrow = document.createElement('i');
         leftArrow.className = "fa-solid fa-chevron-left left-arrow";
         leftArrow.setAttribute("tabindex", "0");
+        leftArrow.setAttribute("role", "link");
+        leftArrow.setAttribute("aria-label", "previous image");
         lightboxContainer.appendChild(leftArrow);
         const figure = document.createElement('figure');
 
         const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
         mediaElement.src = src;
         mediaElement.className = "lightbox-media";
+        mediaElement.setAttribute("alt", `${title}`);
         if (type === 'video') {
             mediaElement.setAttribute("controls", "");
         }
@@ -33,10 +36,14 @@ function lightboxFactory(media, photographer) {
         const rightArrow = document.createElement('i');
         rightArrow.className = "fa-solid fa-chevron-right right-arrow";
         rightArrow.setAttribute("tabindex", "0");
+        rightArrow.setAttribute("role", "link");
+        rightArrow.setAttribute("aria-label", "next image");
         lightboxContainer.appendChild(rightArrow);
         const closeButton = document.createElement('i');
         closeButton.className = "fa-solid fa-xmark close-button";
         closeButton.setAttribute("tabindex", "0");
+        closeButton.setAttribute("role", "button");
+        closeButton.setAttribute("aria-label", "close dialog");
         lightboxContainer.appendChild(closeButton);
 
         return (lightboxContainer);

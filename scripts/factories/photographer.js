@@ -5,6 +5,7 @@ function photographerFactory(data) {
 
     function getUserCardDOM() {
         const article = document.createElement('article');
+        article.className = "photographer-card";
 
         const photographerProfileLink = document.createElement('a');
         photographerProfileLink.href = `photographer.html?id=${id}`;
@@ -12,6 +13,7 @@ function photographerFactory(data) {
 
         const photographerPicture = document.createElement('img');
         photographerPicture.src = picture;
+        photographerPicture.setAttribute("alt", "");
 
         const photographerName = document.createElement('h2');
         photographerName.textContent = name;
@@ -19,9 +21,13 @@ function photographerFactory(data) {
         photographerProfileLink.append(photographerPicture, photographerName);
 
         const textContainer = document.createElement('div');
+        textContainer.className = "photographer-infos";
         const photographerLocation = document.createElement('p');
+        photographerLocation.className = "photographer-location";
         const photographerTagline = document.createElement('p');
+        photographerTagline.className = "photographer-tagline";
         const photographerPrice = document.createElement('p');
+        photographerPrice.className = "photographer-price";
 
         photographerLocation.textContent = city + ", " + country;
         photographerTagline.textContent = tagline;
@@ -46,9 +52,13 @@ function photographerProfileFactory(data) {
         const photographerHeader = document.createElement('div');
         const textInfos = document.createElement('div');
         const photographerName = document.createElement('h1');
+        photographerName.className = "photographer-name";
         const photographerLocalisation = document.createElement('p');
+        photographerLocalisation.className = "photographer-localisation";
         const photographerTagline = document.createElement('p');
+        photographerTagline.className = "photographer-tagline";
         const photographerPicture = document.createElement('img');
+        photographerPicture.setAttribute("aria-label", `${name}`);
         const contactButton = document.createElement('button');
         const moreInfo = document.createElement('div');
         const dailyPrice = document.createElement('p');
@@ -60,7 +70,8 @@ function photographerProfileFactory(data) {
         dailyPrice.textContent = `${price}€ / jour`;
         // enlever le text content
         contactButton.textContent = 'Contactez-moi';
-        contactButton.className = "contact_button";
+        contactButton.className = "contact-button";
+        contactButton.setAttribute("aria-label", "contact me");
         contactButton.setAttribute('onclick', 'displayModal()');
         contactButton.setAttribute('tabindex', '1');
         photographerPicture.src = picture;

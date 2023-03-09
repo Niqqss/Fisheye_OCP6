@@ -11,17 +11,23 @@ function mediaFactory(media, photographer) {
 
     function getUserMediasDOM() {
         const article = document.createElement('article');
+        article.className = "mediaCard";
 
         const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
         mediaElement.src = src;
         mediaElement.className = "media";
+        mediaElement.setAttribute("role", "image link");
+        mediaElement.setAttribute("alt", `${title}`);
         // ID to match with the image displayed in lightbox
         mediaElement.setAttribute("data-id", id);
         article.appendChild(mediaElement);
 
         const mediaTextContainer = document.createElement('div');
+        mediaTextContainer.className = "media-infos";
         const mediaTitle = document.createElement('h3');
+        mediaTitle.className = "media-title";
         const mediaLikes = document.createElement('p');
+        mediaLikes.className = "media-likes";
         const likesCount = document.createElement('span');
         const likeIcon = document.createElement('i');
         mediaTitle.textContent = title;
@@ -29,6 +35,8 @@ function mediaFactory(media, photographer) {
         likesCount.className = "likes-count";
         likeIcon.className = "fa-regular fa-heart";
         likeIcon.setAttribute("tabindex", "3")
+        likeIcon.setAttribute("role", "button");
+        likeIcon.setAttribute("aria-label", `likes`)
 
         // add an event listener to the heart icon to toggle the "liked" property and update the heart icon
         function toggleLiked() {

@@ -23,21 +23,21 @@
     <div class="filters-container">
       <p>Trier par</p>
       <div class="filters">
-        <ul class="filters-list">
-          <li id="popularityFilter" tabindex="2">Popularité</li>
-          <li id="dateFilter" tabindex="2">Date</span></li>
-          <li id="titleFilter" tabindex="2">Titre</span></li>
+        <ul class="filters-list" aria>
+          <li id="popularityFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by popularity">Popularité</li>
+          <li id="dateFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by date">Date</span></li>
+          <li id="titleFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by alphabetical order">Titre</span></li>
         </ul>
       </div>
     </div>
 
   </main>
 
-  <div id="contact-modal">
+  <dialog id="contact-modal">
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" alt="Bouton de fermeture" onclick="closeModal()" tabindex="1">
+        <img src="assets/icons/close.svg" alt="Bouton de fermeture" onclick="closeModal()" tabindex="1" aria-label="close contact form">
       </header>
       <form method="post" id="myform" novalidate>
         <div>
@@ -50,12 +50,12 @@
           <label for="message">Votre message</label>
           <textarea name="message" id="message" class="form-input" tabindex="1"></textarea>
         </div>
-        <button class="contact_button" type="submit" tabindex="1" >Envoyer</button>
+        <button class="contact-button" type="submit" tabindex="1" aria-label="send">Envoyer</button>
       </form>
     </div>
-  </div>
+  </dialog>
 
-  <dialog id="lightbox">
+  <dialog id="lightbox" aria-label="image closeup view">
   </dialog>
 
   <script src="./scripts/factories/photographer.js"></script>

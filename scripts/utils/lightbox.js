@@ -28,6 +28,7 @@ async function displayLightbox(medias, photographers) {
             const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
             mediaElement.src = `assets/images/${photographer.name}/${media[type]}`;
             mediaElement.className = "lightbox-media";
+            mediaElement.setAttribute("alt", `${media.title}`);
             if (type === 'video') {
                 mediaElement.setAttribute("controls", "");
             }

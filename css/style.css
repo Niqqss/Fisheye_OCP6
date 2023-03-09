@@ -43,18 +43,18 @@ main {
     padding: 0;
 }
 
-.photographer-section article {
+.photographer-card {
     margin : 0 auto;
 }
 
-.photographer-section article a {
+.photographer-card a {
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.photographer-section article h2 {
+.photographer-card h2 {
     color: #D3573C;
     font-size: 2.5rem;
     margin-bottom : .3rem;
@@ -62,7 +62,7 @@ main {
     font-weight: 400;
 }
 
-.photographer-section article img {
+.photographer-card img {
     height: 200px;
     width: 200px;
     border-radius: 50%;
@@ -70,23 +70,23 @@ main {
     box-shadow: 0 5px 10px rgba(49, 49, 49, 0.3);
 }
 
-.photographer-section article div {
+.photographer-infos {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.photographer-section article p {
+.photographer-card p {
     margin : .2rem 0;
     font-size : 1.1rem;
 }
 
-.photographer-section article p:first-child {
+.photographer-location {
     color : #901C1C;
     font-size : 1.3rem;
 }
 
-.photographer-section article p:last-child {
+.photographer-price {
     color : #757575;
     font-size: 1rem;
 }
