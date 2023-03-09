@@ -2,6 +2,7 @@ const modal = document.getElementById("contact-modal");
 const closeButton = document.querySelector(".modal header img");
 
 modal.addEventListener("keydown", function (e) {
+  // force the focus to happen in the modal
   const focusableElements = modal.querySelectorAll('img, button, textarea, input[type="text"]');
   const firstFocusable = focusableElements[0];
   const lastFocusable = focusableElements[focusableElements.length - 1];
@@ -39,6 +40,7 @@ function closeModal() {
 }
 
 function formNameFactory(data) {
+  // displays the name of the photographer after "contact me"
   const { name } = data;
 
   function getUserNameDOM() {
@@ -69,9 +71,11 @@ function handleForm(e) {
 }
 
 function handleKeyDown(e) {
+  // prevent sending the form if enter key is pressed on input
   if (e.key === "Enter" && formInputs.some(input => input === document.activeElement)) {
     e.preventDefault();
   }
+  // escape key OR enter while closeButton focused
   if (e.key === "Escape" || e.key === "Enter" && closeButton === document.activeElement) {
     closeModal();
   }

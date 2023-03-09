@@ -12,8 +12,8 @@
 
 <body>
   <header>
-    <a href="index.html">
-      <img src="assets/images/logo.png" alt="Fisheye Home Page" class="logo" tabindex="1">
+    <a href="index.html" tabindex="1">
+      <img src="assets/images/logo.png" alt="Fisheye Home Page" class="logo">
     </a>
   </header>
 
@@ -23,10 +23,10 @@
     <div class="filters-container">
       <p>Trier par</p>
       <div class="filters">
-        <ul class="filters-list" aria>
+        <ul class="filters-list" aria-label="listbox">
           <li id="popularityFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by popularity">Popularité</li>
-          <li id="dateFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by date">Date</span></li>
-          <li id="titleFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by alphabetical order">Titre</span></li>
+          <li id="dateFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by date">Date</li>
+          <li id="titleFilter" tabindex="2" role="button" aria-haspopup="listbox" aria-label="Order by alphabetical order">Titre</li>
         </ul>
       </div>
     </div>
@@ -42,11 +42,11 @@
       <form method="post" id="myform" novalidate>
         <div>
           <label for="firstname">Prénom</label>
-          <input type="text" name="firstname" class="form-input" tabindex="1" aria-label="firstname">
-          <label for="lasttname">Nom</label>
-          <input type="text" name="lastname" class="form-input" tabindex="1" aria-label="lastname">
+          <input type="text" name="firstname" id="firstname" class="form-input" tabindex="1" aria-label="firstname">
+          <label for="lastname">Nom</label>
+          <input type="text" name="lastname" id="lastname" class="form-input" tabindex="1" aria-label="lastname">
           <label for="email">Email</label>
-          <input type="email" name="email" class="form-input" tabindex="1" aria-labell="email">
+          <input type="email" name="email" id="email" class="form-input" tabindex="1" aria-label="email">
           <label for="message">Votre message</label>
           <textarea name="message" id="message" class="form-input" tabindex="1"></textarea>
         </div>

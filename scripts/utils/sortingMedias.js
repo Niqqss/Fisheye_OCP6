@@ -9,12 +9,14 @@ async function displayMedias(medias, photographers) {
         displaySortedMedias(sortedMedias);
     }
 
+    // default sort order
     let currentSortOrder = 'likesDescending';
 
     function sortingMethod(filterId, sortOrder, sortFunction) {
         const filterSelect = document.getElementById(filterId);
 
         function sortMedias() {
+            // prevent sorting the array if same filter is clicked
             if (currentSortOrder === sortOrder) {
                 return;
             }
@@ -33,6 +35,7 @@ async function displayMedias(medias, photographers) {
         });
     }
 
+    // attach click event listeners
     sortingMethod('popularityFilter', 'likesDescending', sortMediasByLikes);
     sortingMethod('dateFilter', 'dateDescending', sortMediasByDate);
     sortingMethod('titleFilter', 'titleAscending', sortMediasByTitle);

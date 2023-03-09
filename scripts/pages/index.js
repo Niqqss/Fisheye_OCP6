@@ -1,5 +1,6 @@
 const api_url = './data/photographers.json';
 
+// API call
 async function getPhotographers() {
     try {
         const response = await fetch(api_url);

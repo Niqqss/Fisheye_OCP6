@@ -1,4 +1,5 @@
 function mediaFactory(media, photographer) {
+    // retrieves data from the json file
     const { name } = photographer;
     const { id, image, video, likes, title } = media;
     const type = media.video ? 'video' : 'image';
@@ -10,6 +11,7 @@ function mediaFactory(media, photographer) {
     }
 
     function getUserMediasDOM() {
+        // adding elements to the DOM and setting their attributes
         const article = document.createElement('article');
         article.className = "mediaCard";
 

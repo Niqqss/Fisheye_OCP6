@@ -1,4 +1,5 @@
 function lightboxFactory(media, photographer) {
+    // retrieves data from json file
     const { name } = photographer;
     const { image, video, title } = media;
     const type = media.video ? 'video' : 'image';
@@ -10,6 +11,7 @@ function lightboxFactory(media, photographer) {
     }
 
     function LightboxDOM() {
+        // adding elements to the DOM and setting their attributes
         const lightboxContainer = document.createElement('div');
         const leftArrow = document.createElement('i');
         leftArrow.className = "fa-solid fa-chevron-left left-arrow";

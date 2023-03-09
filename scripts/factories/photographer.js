@@ -1,9 +1,11 @@
 function photographerFactory(data) {
+    // retrieves data from the json file
     const { name, id, city, country, tagline, price, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
+        // adding elements to the DOM and setting their attributes
         const article = document.createElement('article');
         article.className = "photographer-card";
 
@@ -68,7 +70,7 @@ function photographerProfileFactory(data) {
         photographerLocalisation.textContent = `${city}, ${country}`;
         photographerTagline.textContent = tagline;
         dailyPrice.textContent = `${price}€ / jour`;
-        // enlever le text content
+        // remove text content
         contactButton.textContent = 'Contactez-moi';
         contactButton.className = "contact-button";
         contactButton.setAttribute("aria-label", "contact me");
@@ -76,7 +78,7 @@ function photographerProfileFactory(data) {
         contactButton.setAttribute('tabindex', '1');
         photographerPicture.src = picture;
 
-        // assemble  elements
+        // assemble elements
         moreInfo.className = "more-info";
         moreInfo.append(dailyPrice);
         textInfos.className = "header-text-container";

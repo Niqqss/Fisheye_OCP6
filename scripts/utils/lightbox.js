@@ -8,6 +8,7 @@ async function displayLightbox(medias, photographers) {
     }
 
     function openLightbox(index) {
+        // adding content when opening the lightbox
         const media = medias[index];
         const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
         const lightboxModel = lightboxFactory(media, photographer);
@@ -43,6 +44,7 @@ async function displayLightbox(medias, photographers) {
         }
 
         function displayPreviousMedia() {
+            // allows to loop through the array of medias
             if (index === 0) {
                 index = medias.length;
             }
@@ -66,10 +68,9 @@ async function displayLightbox(medias, photographers) {
 
         document.addEventListener('keydown', handleKeyDown);
 
-
         document.querySelector('.right-arrow').addEventListener("click", displayNextMedia);
         document.querySelector('.right-arrow').addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === ' ' ) {
+            if (e.key === "Enter" || e.key === ' ') {
                 displayNextMedia();
             }
         });

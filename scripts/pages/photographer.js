@@ -1,5 +1,3 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
 const api_url = './data/photographers.json';
 const params = new URLSearchParams(window.location.search);
 let photographerID = params.get("id");
