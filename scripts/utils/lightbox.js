@@ -107,5 +107,5 @@ async function displayLightbox(medias, photographers) {
                 openLightbox(i);
             }
         });
-    };
-};
+    }
+}

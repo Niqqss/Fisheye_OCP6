@@ -26,7 +26,7 @@ async function displayData(photographers) {
         const userCardDOM = photographerModel.getUserCardDOM();
         photographerPage.appendChild(userCardDOM);
     }
-};
+}
 
 async function displayNameModal(photographers) {
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
@@ -70,6 +70,6 @@ async function init() {
     displayNameModal(photographers);
     displayMedias(medias, photographers);
     displayTotalLikes(photographers, medias);
-};
+}
 
 init();

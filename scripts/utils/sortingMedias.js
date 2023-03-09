@@ -7,7 +7,7 @@ async function displayMedias(medias, photographers) {
     } else {
         var sortedMedias = sortMediasByLikes(filteredMedias);
         displaySortedMedias(sortedMedias);
-    };
+    }
 
     let currentSortOrder = 'likesDescending';
 
