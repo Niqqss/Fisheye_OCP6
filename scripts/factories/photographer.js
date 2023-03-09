@@ -16,6 +16,8 @@ function photographerFactory(data) {
         const photographerPicture = document.createElement('img');
         photographerPicture.src = picture;
         photographerPicture.setAttribute("alt", "");
+        photographerPicture.setAttribute("width", "200px");
+        photographerPicture.setAttribute("height", "200px");
 
         const photographerName = document.createElement('h2');
         photographerName.textContent = name;

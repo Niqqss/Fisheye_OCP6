@@ -312,3 +312,7 @@ form input {
 .filters-list.show li:not(:first-child) {
     display: flex;
 }
+
+input::placeholder {
+    color : rgba(0, 0, 0, 0.4);
+}
