@@ -6,7 +6,7 @@ listIcon.className = "fa-solid fa-chevron-down";
 activeFilter.append(listIcon);
 
 filters.forEach(filter => {
-    filter.addEventListener('click', function () {
+    function toggleFiltersList() {
         // Swap the active filter and clicked filter in the DOM
         filtersList.insertBefore(this, activeFilter);
         // Update the active filter reference to the clicked filter
@@ -15,7 +15,16 @@ filters.forEach(filter => {
         listIcon.classList.toggle('fa-chevron-down');
         listIcon.classList.toggle('fa-chevron-up');
         activeFilter.appendChild(listIcon);
+    }
+
+    filter.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            toggleFiltersList.call(this);
+        }
     });
+    
+    filter.addEventListener('click', toggleFiltersList);
 });
+
 
 

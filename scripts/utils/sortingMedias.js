@@ -11,9 +11,10 @@ async function displayMedias(medias, photographers) {
 
     let currentSortOrder = 'likesDescending';
 
-    function addFilterClickListener(buttonId, sortOrder, sortFunction) {
-        const button = document.getElementById(buttonId);
-        button.addEventListener('click', () => {
+    function sortingMethod(filterId, sortOrder, sortFunction) {
+        const filterSelect = document.getElementById(filterId);
+
+        function sortMedias() {
             if (currentSortOrder === sortOrder) {
                 return;
             }
@@ -22,12 +23,19 @@ async function displayMedias(medias, photographers) {
             lightboxFactory(medias, photographers);
             currentSortOrder = sortOrder;
             likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
+        }
+
+        filterSelect.addEventListener('click', sortMedias);
+        filterSelect.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                sortMedias();
+            }
         });
     }
 
-    addFilterClickListener('popularityFilter', 'likesDescending', sortMediasByLikes);
-    addFilterClickListener('dateFilter', 'dateDescending', sortMediasByDate);
-    addFilterClickListener('titleFilter', 'titleAscending', sortMediasByTitle);
+    sortingMethod('popularityFilter', 'likesDescending', sortMediasByLikes);
+    sortingMethod('dateFilter', 'dateDescending', sortMediasByDate);
+    sortingMethod('titleFilter', 'titleAscending', sortMediasByTitle);
 
     function displaySortedMedias(sortedMedias) {
         // clear existing medias from the DOM
@@ -55,9 +63,17 @@ async function displayMedias(medias, photographers) {
 
         const mediasList = document.querySelectorAll(".medias-section .media");
 
-        mediasList.forEach((media) => media.addEventListener("click", () => {
-            lightbox.showModal();
-        }));
+        mediasList.forEach((media) => {
+            media.addEventListener("click", () => {
+                lightbox.showModal();
+            });
+
+            media.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    lightbox.showModal();
+                }
+            });
+        });
     }
 }
 

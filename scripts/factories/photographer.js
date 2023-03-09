@@ -62,6 +62,7 @@ function photographerProfileFactory(data) {
         contactButton.textContent = 'Contactez-moi';
         contactButton.className = "contact_button";
         contactButton.setAttribute('onclick', 'displayModal()');
+        contactButton.setAttribute('tabindex', '1');
         photographerPicture.src = picture;
 
         // assemble  elements
