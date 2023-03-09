@@ -48,12 +48,12 @@ function mediaFactory(media, photographer) {
 
             if (likeIcon.classList.contains('active')) {
                 // outlined shape if not liked
-                likeIcon.classList.toggle('fa-solid');
-                likeIcon.classList.toggle('fa-regular');
+                likeIcon.classList.remove('fa-solid');
+                likeIcon.classList.add('fa-regular');
             } else {
                 // full shape if liked
-                likeIcon.classList.toggle('fa-solid');
-                likeIcon.classList.toggle('fa-regular');
+                likeIcon.classList.add('fa-solid');
+                likeIcon.classList.remove('fa-regular');
             }
 
             likeIcon.classList.toggle('active');

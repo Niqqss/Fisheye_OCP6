@@ -57,7 +57,9 @@ async function displayMedias(medias, photographers) {
                 const likeIcon = userMediasDOM.querySelector('.fa-heart');
                 likeIcon.classList.add('active');
                 likeIcon.classList.add('fa-solid');
+                const likesCountElement = userMediasDOM.querySelector('.likes-count');
                 media.likes += 1;
+                likesCountElement.textContent = media.likes + ' ';
             }
             mediasSection.appendChild(userMediasDOM);
         });

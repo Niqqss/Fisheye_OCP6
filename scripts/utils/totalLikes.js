@@ -27,7 +27,6 @@ function likesUpdate(medias, likeButtons) {
                 updateLikes();
             }
         }
-
     });
 
     updateTotalLikes();
