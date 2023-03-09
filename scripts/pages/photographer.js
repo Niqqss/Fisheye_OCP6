@@ -1,4 +1,5 @@
 const api_url = './data/photographers.json';
+// retrieves the ID from the URL
 const params = new URLSearchParams(window.location.search);
 let photographerID = params.get("id");
 
