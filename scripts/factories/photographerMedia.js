@@ -49,7 +49,7 @@ class mediaFactory {
         likeIcon.setAttribute("aria-label", `likes`)
 
         // add an event listener to the heart icon to toggle the "liked" property and update the heart icon
-        function toggleLiked() {
+        function toggleLiked(media) {
             media.liked = !media.liked; // toggle the "liked" property
             const newLikes = parseInt(likesCount.textContent) + (likeIcon.classList.contains('active') ? -1 : 1);
             likesCount.textContent = newLikes + " ";

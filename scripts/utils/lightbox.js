@@ -14,7 +14,6 @@ async function displayLightbox(medias, photographers) {
         const lightboxDOM = new LightboxFactory(media, photographer);
         const lightboxContainer = lightboxDOM.LightboxDOM();
         lightbox.appendChild(lightboxContainer);
-        const closeButton = document.querySelector('.close-button');
         const backgroundPage = document.querySelector('body');
         backgroundPage.classList.add("hidden-body");
 
@@ -22,11 +21,16 @@ async function displayLightbox(medias, photographers) {
             const lightboxDOM = new LightboxFactory(media, photographer);
             const lightboxContainer = lightboxDOM.LightboxDOM();
             const previousMediaElement = lightbox.querySelector('.lightbox-container');
+
             if (previousMediaElement) {
                 lightbox.removeChild(previousMediaElement);
             }
             lightbox.appendChild(lightboxContainer);
+            handleEvents();
         }
+
+        document.addEventListener('keydown', handleKeyDown);
+        handleEvents();
 
         function displayNextMedia() {
             index = (index + 1) % medias.length;
@@ -44,6 +48,39 @@ async function displayLightbox(medias, photographers) {
             displayMedia(previousMedia);
         }
 
+        function handleEvents() {
+            const rightArrow = document.querySelector('.right-arrow');
+            const leftArrow = document.querySelector('.left-arrow');
+            const closeButton = document.querySelector('.close-button');
+
+            rightArrow.addEventListener("click", displayNextMedia);
+            rightArrow.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    displayNextMedia();
+                }
+            })
+            leftArrow.addEventListener("click", displayPreviousMedia);
+            leftArrow.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    displayPreviousMedia();
+                }
+            })
+            closeButton.addEventListener("click", function () {
+                lightbox.close()
+                backgroundPage.classList.remove("hidden-body");
+                lightbox.innerHTML = "";
+                document.removeEventListener('keydown', handleKeyDown);
+            });
+            closeButton.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    lightbox.close()
+                    backgroundPage.classList.remove("hidden-body");
+                    lightbox.innerHTML = "";
+                    document.removeEventListener('keydown', handleKeyDown);
+                }
+            });
+        }
+
         function handleKeyDown(event) {
             if (event.key === 'Escape') {
                 lightbox.close();
@@ -56,37 +93,6 @@ async function displayLightbox(medias, photographers) {
                 displayPreviousMedia();
             }
         }
-
-        document.addEventListener('keydown', handleKeyDown);
-
-        document.querySelector('.right-arrow').addEventListener("click", displayNextMedia);
-        document.querySelector('.right-arrow').addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === ' ') {
-                displayNextMedia();
-            }
-        });
-        document.querySelector('.left-arrow').addEventListener("click", displayPreviousMedia);
-        document.querySelector('.left-arrow').addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === ' ') {
-                displayPreviousMedia();
-            }
-        });
-
-        closeButton.addEventListener("click", function () {
-            lightbox.close()
-            backgroundPage.classList.remove("hidden-body");
-            lightbox.innerHTML = "";
-            document.removeEventListener('keydown', handleKeyDown);
-        });
-
-        closeButton.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") {
-                lightbox.close()
-                backgroundPage.classList.remove("hidden-body");
-                lightbox.innerHTML = "";
-                document.removeEventListener('keydown', handleKeyDown);
-            }
-        });
     }
 
     for (let i = 0; i < mediasList.length; i++) {
