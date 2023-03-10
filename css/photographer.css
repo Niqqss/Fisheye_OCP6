@@ -204,24 +204,23 @@ form input {
     flex-wrap: wrap;
     justify-content: center;
     border: none;
-
+    overflow: hidden;
 }
 
 #lightbox::backdrop {
     background-color: white;
 }
 
-#lightbox div {
+.lightbox-container {
     display: flex;
     align-items: center;
     position: relative;
 }
 
-
 #lightbox img,
 #lightbox video {
-    width: 50rem;
-    height: 50rem;
+    width: 45rem;
+    height: 45rem;
     object-fit: cover;
 }
 
