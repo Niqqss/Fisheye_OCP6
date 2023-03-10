@@ -1,19 +1,28 @@
-function lightboxFactory(media, photographer) {
-    // retrieves data from json file
-    const { name } = photographer;
-    const { image, video, title } = media;
-    const type = media.video ? 'video' : 'image';
-    let src;
-    if (type === 'video') {
-        src = `assets/images/${name}/${video}`
-    } else {
-        src = `assets/images/${name}/${image}`;
+class LightboxFactory {
+    constructor(media, photographer) {
+        this.media = media;
+        this.photographer = photographer;
+        this.createMedia = function () {
+            let typeOfMedia;
+            if (this.media.video) {
+                typeOfMedia = new LightboxVideoMedia(this.photographer.name, this.media.video);
+            }
+            else if (this.media.image) {
+                typeOfMedia = new LightboxImageMedia(this.photographer.name, this.media.image);
+            }
+            else {
+                throw "Unknown media type";
+            }
+            return typeOfMedia;
+        }
     }
 
-    function LightboxDOM() {
+    LightboxDOM() {
         // adding elements to the DOM and setting their attributes
+        const { title } = this.media;
         const lightboxContainer = document.createElement('div');
         const leftArrow = document.createElement('i');
+        lightboxContainer.className = "lightbox-container";
         leftArrow.className = "fa-solid fa-chevron-left left-arrow";
         leftArrow.setAttribute("tabindex", "0");
         leftArrow.setAttribute("role", "link");
@@ -21,13 +30,9 @@ function lightboxFactory(media, photographer) {
         lightboxContainer.appendChild(leftArrow);
         const figure = document.createElement('figure');
 
-        const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
-        mediaElement.src = src;
-        mediaElement.className = "lightbox-media";
+        const typeOfMedia = this.createMedia();
+        const mediaElement = typeOfMedia.render();
         mediaElement.setAttribute("alt", `${title}`);
-        if (type === 'video') {
-            mediaElement.setAttribute("controls", "");
-        }
         figure.appendChild(mediaElement);
 
         const mediaTitle = document.createElement('figcaption');
@@ -35,6 +40,7 @@ function lightboxFactory(media, photographer) {
         mediaTitle.textContent = title;
         lightboxContainer.appendChild(figure);
         figure.appendChild(mediaTitle);
+
         const rightArrow = document.createElement('i');
         rightArrow.className = "fa-solid fa-chevron-right right-arrow";
         rightArrow.setAttribute("tabindex", "0");
@@ -48,7 +54,33 @@ function lightboxFactory(media, photographer) {
         closeButton.setAttribute("aria-label", "close dialog");
         lightboxContainer.appendChild(closeButton);
 
-        return (lightboxContainer);
+        return lightboxContainer;
     }
-    return { LightboxDOM };
+}
+
+class LightboxVideoMedia {
+    constructor(name, video) {
+        this.name = name;
+        this.video = video;
+    }
+
+    render() {
+        const videoElement = document.createElement('video');
+        videoElement.src = `assets/images/${this.name}/${this.video}`;
+        videoElement.setAttribute('controls', '');
+        return videoElement;
+    }
+}
+
+class LightboxImageMedia {
+    constructor(name, image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    render() {
+        const imageElement = document.createElement('img');
+        imageElement.src = `assets/images/${this.name}/${this.image}`;
+        return imageElement;
+    }
 }

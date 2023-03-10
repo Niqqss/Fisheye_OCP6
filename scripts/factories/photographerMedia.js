@@ -1,22 +1,30 @@
-function mediaFactory(media, photographer) {
-    // retrieves data from the json file
-    const { name } = photographer;
-    const { id, image, video, likes, title } = media;
-    const type = media.video ? 'video' : 'image';
-    let src;
-    if (type === 'video') {
-        src = `assets/images/${name}/${video}`
-    } else {
-        src = `assets/images/${name}/${image}`;
+class mediaFactory {
+    constructor(media, photographer) {
+        this.media = media;
+        this.photographer = photographer;
+        this.createMedia = function () {
+            let typeOfMedia;
+            if (this.media.video) {
+                typeOfMedia = new VideoMedia(this.photographer.name, this.media.video);
+            }
+            else if (this.media.image) {
+                typeOfMedia = new ImageMedia(this.photographer.name, this.media.image);
+            }
+            else {
+                throw "Unknown media type";
+            }
+            return typeOfMedia;
+        }
     }
 
-    function getUserMediasDOM() {
-        // adding elements to the DOM and setting their attributes
+    getUserMediasDOM() {
+        const { title, id, likes } = this.media;
         const article = document.createElement('article');
         article.className = "mediaCard";
 
-        const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
-        mediaElement.src = src;
+        const typeOfMedia = this.createMedia();
+        const mediaElement = typeOfMedia.render();
+        mediaElement.setAttribute("alt", `${title}`);
         mediaElement.className = "media";
         mediaElement.setAttribute("role", "image link");
         mediaElement.setAttribute("alt", `${title}`);
@@ -74,5 +82,30 @@ function mediaFactory(media, photographer) {
         mediaLikes.append(likesCount, likeIcon);
         return (article);
     }
-    return { getUserMediasDOM };
+}
+
+class VideoMedia {
+    constructor(name, video) {
+        this.name = name;
+        this.video = video;
+    }
+
+    render() {
+        const videoElement = document.createElement('video');
+        videoElement.src = `assets/images/${this.name}/${this.video}`;
+        return videoElement;
+    }
+}
+
+class ImageMedia {
+    constructor(name, image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    render() {
+        const imageElement = document.createElement('img');
+        imageElement.src = `assets/images/${this.name}/${this.image}`;
+        return imageElement;
+    }
 }

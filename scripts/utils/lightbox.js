@@ -11,30 +11,21 @@ async function displayLightbox(medias, photographers) {
         // adding content when opening the lightbox
         const media = medias[index];
         const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
-        const lightboxModel = lightboxFactory(media, photographer);
-        const lightboxDOM = lightboxModel.LightboxDOM();
-        lightbox.appendChild(lightboxDOM);
+        const lightboxDOM = new LightboxFactory(media, photographer);
+        const lightboxContainer = lightboxDOM.LightboxDOM();
+        lightbox.appendChild(lightboxContainer);
         const closeButton = document.querySelector('.close-button');
         const backgroundPage = document.querySelector('body');
         backgroundPage.classList.add("hidden-body");
 
-        let lightboxMedia = document.querySelector('.lightbox-media');
-        let lightboxMediaName = document.querySelector('.lightbox-media-name');
-
         function displayMedia(media) {
-            const type = media.video ? 'video' : 'image';
-            lightboxMediaName.textContent = media.title;
-            const figure = document.querySelector("dialog figure");
-
-            const mediaElement = type === 'video' ? document.createElement('video') : document.createElement('img');
-            mediaElement.src = `assets/images/${photographer.name}/${media[type]}`;
-            mediaElement.className = "lightbox-media";
-            mediaElement.setAttribute("alt", `${media.title}`);
-            if (type === 'video') {
-                mediaElement.setAttribute("controls", "");
+            const lightboxDOM = new LightboxFactory(media, photographer);
+            const lightboxContainer = lightboxDOM.LightboxDOM();
+            const previousMediaElement = lightbox.querySelector('.lightbox-container');
+            if (previousMediaElement) {
+                lightbox.removeChild(previousMediaElement);
             }
-            figure.replaceChild(mediaElement, lightboxMedia);
-            lightboxMedia = mediaElement;
+            lightbox.appendChild(lightboxContainer);
         }
 
         function displayNextMedia() {

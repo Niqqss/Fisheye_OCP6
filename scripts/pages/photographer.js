@@ -13,7 +13,7 @@ async function getPhotographers() {
     }
 }
 
-async function displayData(photographers) {
+function displayData(photographers) {
     const photographerPage = document.getElementById('main');
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     if (!photographer) {
@@ -27,7 +27,7 @@ async function displayData(photographers) {
     }
 }
 
-async function displayNameModal(photographers) {
+function displayNameModal(photographers) {
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     if (!photographer) {
         console.error(`Could not display photographer name for ID "${photographerID}"`);
@@ -39,7 +39,7 @@ async function displayNameModal(photographers) {
     }
 }
 
-async function displayTotalLikes(photographers, medias) {
+function displayTotalLikes(photographers, medias) {
     const photographer = photographers.find((photographer) => photographer.id == photographerID);
     const filteredMedias = medias.filter((media) => media.photographerId == photographerID);
 

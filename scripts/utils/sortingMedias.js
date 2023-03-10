@@ -22,7 +22,7 @@ async function displayMedias(medias, photographers) {
             }
             sortedMedias = sortFunction(sortedMedias);
             displaySortedMedias(sortedMedias);
-            lightboxFactory(medias, photographers);
+            new LightboxFactory(medias, photographers);
             currentSortOrder = sortOrder;
             likesUpdate(sortedMedias, document.querySelectorAll('i.fa-heart'));
         }
@@ -49,7 +49,7 @@ async function displayMedias(medias, photographers) {
         // display sorted medias
         sortedMedias.forEach((media) => {
             const photographer = photographers.find((photographer) => photographer.id == media.photographerId);
-            const mediaModel = mediaFactory(media, photographer);
+            const mediaModel = new mediaFactory(media, photographer);
             const userMediasDOM = mediaModel.getUserMediasDOM();
 
             // Check if the media has been liked and update the heart icon and likes count
