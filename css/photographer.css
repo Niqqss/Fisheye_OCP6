@@ -219,8 +219,8 @@ form input {
 
 #lightbox img,
 #lightbox video {
-    width: 45rem;
-    height: 45rem;
+    width: 35rem;
+    height: 35rem;
     object-fit: cover;
 }
 
